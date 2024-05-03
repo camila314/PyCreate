@@ -30,7 +30,6 @@ char* sendMessage(char const* text) {
 	// Send a message to the named pipe "GeodeIPCPipe"
 
 	DWORD dw;
-	std::string response;
 
 	HANDLE hPipe = CreateFile(TEXT("\\\\.\\pipe\\GeodeIPCPipe"), 
 	                   GENERIC_READ | GENERIC_WRITE, 
