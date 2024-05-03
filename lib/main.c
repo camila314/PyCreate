@@ -26,6 +26,7 @@ char* sendMessage(char const* text) {
 #else
 #include <Windows.h>
 
+static char response[1024];
 char* sendMessage(char const* text) {
 	// Send a message to the named pipe "GeodeIPCPipe"
 
