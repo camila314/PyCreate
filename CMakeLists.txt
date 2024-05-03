@@ -6,7 +6,10 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 project(PyCreate VERSION 1.0.0)
 
 add_library(PyBind SHARED lib/main.c)
-target_link_libraries(PyBind "-framework CoreFoundation")
+
+if (APPLE)
+    target_link_libraries(PyBind "-framework CoreFoundation")
+endif()
 
 set(CMAKE_OSX_ARCHITECTURES "x86_64")
 
@@ -30,10 +33,15 @@ endif()
 
 add_subdirectory(codegen)
 
+if (APPLE)
+    set(BIND_VER 2.200)
+else()
+    set(BIND_VER 2.204)
+endif()
 
 add_custom_command(
     DEPENDS ${PyCodegen_BINARY_DIR}/PyCodegen
-    COMMAND ${PyCodegen_BINARY_DIR}/PyCodegen ${GEODE_BINDINGS_REPO_PATH}/bindings/2.200/Entry.bro
+    COMMAND ${PyCodegen_BINARY_DIR}/PyCodegen ${GEODE_BINDINGS_REPO_PATH}/bindings/${BIND_VER}/Entry.bro
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/main.cpp
 )
