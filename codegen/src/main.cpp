@@ -301,7 +301,7 @@ std::string parseCpp(broma::Root& root) {
                     if (bind->binds.mac == -1)
                         continue;
                 #else
-                    if (bind->binds.windows == -1)
+                    if (bind->binds.win == -1)
                         continue;
                 #endif
             }
@@ -522,7 +522,7 @@ std::string parsePython(broma::Root& root) {
                     if (bind->binds.mac == -1)
                         continue;
                 #else
-                    if (bind->binds.windows == -1)
+                    if (bind->binds.win == -1)
                         continue;
                 #endif
             }
