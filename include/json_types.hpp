@@ -15,6 +15,8 @@ concept supports_as = !pointer<T> && requires(matjson::Value const& t) {
 	t.as<T>();
 };
 
+template<typename T> concept enum_type = std::is_enum_v<T>;
+
 #define ENUM_SER(name) \
 	template<> \
 	struct matjson::Serialize<name> { \
@@ -54,7 +56,7 @@ REF_SER(CCIndexPath)
 
 #undef CommentType
 
-ENUM_SER(cocos2d::ccGLServerState)
+/*ENUM_SER(cocos2d::ccGLServerState)
 ENUM_SER(cocos2d::ccTouchesMode)
 ENUM_SER(cocos2d::enumKeyCodes)
 ENUM_SER(cocos2d::CCTexture2DPixelFormat)
@@ -110,6 +112,9 @@ ENUM_SER(GJMPErrorCode)
 ENUM_SER(ObjectScaleType)
 ENUM_SER(UndoCommand)
 ENUM_SER(PlayerCollisionDirection)
+ENUM_SER(AudioModType)
+ENUM_SER(FMODQueuedMusic)
+ENUM_SER(AudioGuidelinesType)*/
 
 EMPTY_SER(CAState)
 EMPTY_SER(ChanceObject)
@@ -123,16 +128,16 @@ EMPTY_SER(UIButtonConfig)
 EMPTY_SER(GJFeatureState)
 
 
-/*template <supports_as T>
+template <enum_type T>
 struct matjson::Serialize<T> {
 	static T from_json(matjson::Value const& val) {
-		return val.as<T>();
+		return static_cast<T>(val.as<int>());
 	}
 
 	static matjson::Value to_json(T const& val) {
-		return val;
+		return static_cast<int>(val);
 	}
-};*/
+};
 
 template <pointer T>
 struct matjson::Serialize<T> {
