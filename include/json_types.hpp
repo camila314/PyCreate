@@ -267,14 +267,23 @@ struct matjson::Serialize<_ccColor4F> {
 	}
 };
 
+
+struct otherHSVValue {
+    float h, s, v;
+    bool absoluteSaturation;
+    bool absoluteBrightness;
+};
+
+
 template <>
 struct matjson::Serialize<_ccHSVValue> {
 	static _ccHSVValue from_json(matjson::Value const& val) {
-		return { (float)val[0].as<float>(), (float)val[1].as<float>(), (float)val[2].as<float>(), (GLubyte)val[3].as<int>(), (GLubyte)val[4].as<int>(), val[5].as<bool>(), val[6].as<bool>() };
+		otherHSVValue out =  { (float)val[0].as<float>(), (float)val[1].as<float>(), (float)val[2].as<float>(), (bool)val[3].as<int>(), (bool)val[4].as<int>() };
+		return reference_cast<_ccHSVValue>(out);
 	}
 
 	static matjson::Value to_json(_ccHSVValue const& val) {
-		std::vector<matjson::Value> arr = { val.h, val.s, val.v, (int)val.absoluteSaturation, (int)val.absoluteBrightness, val.saturationChecked, val.brightnessChecked };
+		std::vector<matjson::Value> arr = { val.h, val.s, val.v, (int)val.absoluteSaturation, (int)val.absoluteBrightness };
 		return arr;
 	}
 };
