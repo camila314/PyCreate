@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <set>
 #include <fstream>
+#include <filesystem>
 
 char const* cpp_begin = R"BALL(//Codegen
 #include <json_types.hpp>
