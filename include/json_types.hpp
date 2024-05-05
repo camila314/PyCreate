@@ -202,6 +202,17 @@ struct matjson::Serialize<char const*> {
 	}
 };
 
+template <>
+struct matjson::Serialize<gd::string> {
+	static gd::string from_json(matjson::Value const& val) {
+		return val.as_string();
+	}
+
+	static matjson::Value to_json(gd::string const& val) {
+		return std::string(val);
+	}
+};
+
 
 template <>
 struct matjson::Serialize<CCPoint> {
