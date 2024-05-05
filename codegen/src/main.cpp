@@ -297,7 +297,7 @@ std::string parseCpp(broma::Root& root) {
     for (auto& cls : root.classes) {
         for (auto& field : cls.fields) {
             if (auto bind = field.get_as<broma::FunctionBindField>()) {
-                #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+                #if GEODE_IS_MACOS
                     if (bind->binds.mac == -1)
                         continue;
                 #else
@@ -518,7 +518,7 @@ std::string parsePython(broma::Root& root) {
         std::vector<broma::MemberFunctionProto*> fns;
         for (auto& field : cls.fields) {
             if (auto bind = field.get_as<broma::FunctionBindField>()) {
-                #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+                #if GEODE_IS_MACOS
                     if (bind->binds.mac == -1)
                         continue;
                 #else
