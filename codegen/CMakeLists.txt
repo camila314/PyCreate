@@ -5,7 +5,7 @@ project(PyCodegen VERSION 0.1.0 LANGUAGES CXX C)
 include(./CPM.cmake)
 
 CPMAddPackage("gh:camila314/Broma#master")
-CPMAddPackage("gh:fmtlib/fmt#master")
+CPMAddPackage("gh:fmtlib/fmt#10.1.1")
 
 file(GLOB SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp

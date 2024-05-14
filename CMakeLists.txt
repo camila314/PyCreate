@@ -43,10 +43,11 @@ add_custom_command(
     DEPENDS ${PyCodegen_BINARY_DIR}/PyCodegen
     COMMAND ${PyCodegen_BINARY_DIR}/PyCodegen ${GEODE_BINDINGS_REPO_PATH}/bindings/${BIND_VER}/Entry.bro
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/main.cpp
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/bind.cpp
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/hook.cpp
 )
 
-add_library(${PROJECT_NAME} SHARED ${CMAKE_CURRENT_BINARY_DIR}/main.cpp)
+add_library(${PROJECT_NAME} SHARED ${CMAKE_CURRENT_BINARY_DIR}/bind.cpp ${CMAKE_CURRENT_BINARY_DIR}/hook.cpp)
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 
 if (NOT DEFINED ENV{GEODE_SDK})

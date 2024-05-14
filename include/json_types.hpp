@@ -169,7 +169,12 @@ struct matjson::Serialize<std::vector<T>> {
 	static matjson::Value to_json(std::vector<T> const& val) {
 		std::vector<matjson::Value> arr;
 		for (auto& v : val) {
-			arr.push_back(Serialize<T>().to_json(v));
+			if constexpr (std::is_same_v<T, void*>) {
+				// todo make better
+				arr.push_back(reference_cast<long>(v));
+			} else {
+				arr.push_back(v);
+			}
 		}
 		return arr;
 	}
@@ -188,7 +193,7 @@ struct matjson::Serialize<std::set<T>> {
 	static matjson::Value to_json(std::set<T> const& val) {
 		std::vector<matjson::Value> arr;
 		for (auto& v : val) {
-			arr.push_back(Serialize<T>().to_json(v));
+			arr.push_back(v);
 		}
 		return arr;
 	}

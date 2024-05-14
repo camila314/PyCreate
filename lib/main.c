@@ -1,5 +1,6 @@
 #if __APPLE__
 #include <CoreFoundation/CoreFoundation.h>
+#include <stdio.h>
 
 static char response[1024];
 static CFMessagePortRef port;
@@ -15,6 +16,7 @@ char* sendMessage(char const* text) {
 	CFMessagePortSendRequest(port, 0, (CFDataRef)data, 1, 1, kCFRunLoopDefaultMode, &ret);
 	
 	if (ret == NULL) {
+		port = CFMessagePortCreateRemote(NULL, CFStringCreateWithCString(NULL, "GeodeIPCPipe", kCFStringEncodingUTF8));
 		return NULL;
 	}
 
