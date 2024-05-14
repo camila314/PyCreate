@@ -13,11 +13,6 @@ std::string convert_to_hex(T value) {
     return ss.str();
 }
 
-matjson::Value point_to_json(const CCPoint& point) {
-    std::vector<matjson::Value> arr = { point.x, point.y };
-    return arr;
-}
-
 template <typename T>
 struct _not_void {
     using type = T;
