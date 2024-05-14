@@ -4,7 +4,7 @@ Donate to me [please](https://ko-fi.com/camila314).
 
 ## Python bindings for Geode.
 
-Using codegen technology to automatically generate bindings for almost all functions defined in Geode. Currently **MAC ONLY**. Windows support will be added soon!
+Using codegen technology to automatically generate bindings for almost all functions defined in Geode. Untested on windows, please test on windows!
 
 ## Important Things
 
